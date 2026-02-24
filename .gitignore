@@ -1,0 +1,13 @@
+.env
+/.vscode
+.DS_Store
+terraform.tfvars
+/build
+.terraform
+**/.terraform.lock.hcl
+**/*.tfstate.backup
+*.conf
+*.tfstate
+*.tfstate.*
+*.tfvars
+backend.conf
